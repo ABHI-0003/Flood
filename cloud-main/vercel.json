@@ -1,9 +1,0 @@
-{
-  "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api-handler/api_handler.py" }
-  ],
-  "builds": [
-    { "src": "website/**/*", "use": "@vercel/static" },
-    { "src": "api-handler/api_handler.py", "use": "@vercel/python" }
-  ]
-}

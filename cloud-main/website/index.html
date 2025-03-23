@@ -3,143 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Real-time flood prediction system using machine learning to help communities prepare for potential flooding events">
-    <title>Flood Prediction System</title>
+    <title>Flood Prediction Project</title>
     <link rel="stylesheet" href="styles/main.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <button id="mode-toggle" class="mode-toggle" aria-label="Toggle dark mode">
-        <i class="material-icons">dark_mode</i>
-    </button>
-
     <header>
         <nav>
             <a href="/"><i class="material-icons">home</i> Home</a>
             <a href="dashboard.html"><i class="material-icons">dashboard</i> Dashboard</a>
-            <a href="#about"><i class="material-icons">info</i> About</a>
-            <a href="#contact"><i class="material-icons">email</i> Contact</a>
         </nav>
     </header>
 
     <main>
         <!-- Hero Section -->
         <section class="hero">
-            <h1>Flood Prediction System</h1>
-            <p>Real-time flood forecasting powered by machine learning</p>
-            <div class="hero-buttons">
-                <a href="dashboard.html">
-                    <button><i class="material-icons">dashboard</i> View Dashboard</button>
-                </a>
-                <a href="#how-it-works">
-                    <button class="secondary"><i class="material-icons">info</i> Learn More</button>
-                </a>
-            </div>
-        </section>
-
-        <!-- How It Works Section -->
-        <section id="how-it-works" class="how-it-works">
-            <h2>How It Works</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <i class="material-icons">sensors</i>
-                    <h3>Data Collection</h3>
-                    <p>Our system collects real-time data from environmental sensors including soil moisture, rainfall, temperature, and humidity.</p>
-                </div>
-                <div class="feature-card">
-                    <i class="material-icons">memory</i>
-                    <h3>ML Processing</h3>
-                    <p>Advanced machine learning algorithms analyze the data patterns to predict potential flooding events.</p>
-                </div>
-                <div class="feature-card">
-                    <i class="material-icons">notifications</i>
-                    <h3>Early Warnings</h3>
-                    <p>The system provides early warnings for potential flood risks within the next 24 and 48 hours.</p>
-                </div>
-                <div class="feature-card">
-                    <i class="material-icons">assessment</i>
-                    <h3>Risk Analysis</h3>
-                    <p>Detailed risk assessment helps communities prepare and mitigate the impact of flooding events.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Graph Section -->
-        <section id="graphs" class="graphs">
-            <h2>Flood Risk Trends</h2>
-            <p>Explore historical flood risk trends and sensor data.</p>
-            <div class="chart-container">
-                <canvas id="historical-chart"></canvas>
-            </div>
+            <h1>Welcome to the Flood Prediction Project</h1>
+            <p>This project provides real-time flood forecasts and environmental data.</p>
+            <a href="dashboard.html">
+                <button><i class="material-icons">arrow_forward</i> View Predictions</button>
+            </a>
         </section>
 
         <!-- About Section -->
-        <section id="about" class="about">
+        <section class="about">
             <h2>About the Project</h2>
             <p>
-                The Flood Prediction System aims to provide accurate and timely flood forecasts
+                The Flood Prediction Project aims to provide accurate and timely flood forecasts
                 to help communities prepare for potential flooding events. Our system uses advanced
-                machine learning models to predict flood risks based on environmental data.
+                machine learning models to predict water levels, flow, temperature, and humidity
+                for the next 24 and 48 hours.
             </p>
             <p>
-                This project combines IoT sensor technology, data science, and cloud computing
-                to deliver reliable predictions that can help save lives and reduce property damage.
+                This project is developed by a team of passionate engineers and data scientists
+                dedicated to making a positive impact on society.
             </p>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="contact">
-            <h2>Contact Us</h2>
-            <p>Have questions or want to learn more about the project? Reach out to our team.</p>
-            <form id="contact-form" class="contact-form">
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input type="text" id="name" name="name" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" name="email" required>
-                </div>
-                <div class="form-group">
-                    <label for="message">Message</label>
-                    <textarea id="message" name="message" rows="5" required></textarea>
-                </div>
-                <button type="submit">Send Message <i class="material-icons">send</i></button>
-            </form>
         </section>
     </main>
 
     <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Flood Prediction System</h3>
-                <p>A project dedicated to flood risk monitoring and prediction</p>
-            </div>
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="/">Home</a></li>
-                    <li><a href="dashboard.html">Dashboard</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Connect</h3>
-                <div class="social-icons">
-                    <a href="#" aria-label="GitHub"><i class="material-icons">code</i></a>
-                    <a href="#" aria-label="Twitter"><i class="material-icons">public</i></a>
-                    <a href="#" aria-label="Email"><i class="material-icons">email</i></a>
-                </div>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2023 Flood Prediction Team | All Rights Reserved</p>
-        </div>
+        <p>&copy; 2023 Flood Prediction Team</p>
     </footer>
-
-    <script src="scripts/main.js"></script>
 </body>
 </html>

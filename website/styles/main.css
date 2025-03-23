@@ -6,6 +6,7 @@ body {
     background-size: 400% 400%;
     animation: gradient 15s ease infinite;
     color: #333;
+    transition: all 0.3s ease;
 }
 
 @keyframes gradient {
@@ -73,28 +74,42 @@ main {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
     padding: 20px;
+    margin-bottom: 60px; /* Added to prevent footer overlap */
 }
 
 .card {
-    background: rgba(255, 255, 255, 0.8);
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 5px;
+    background: #6200ee;
 }
 
 .card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 12px 16px rgba(0, 0, 0, 0.2);
 }
 
 .chart-container {
     margin-top: 2rem;
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(255, 255, 255, 0.9);
     padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 60px; /* Added to prevent footer overlap */
 }
 
 footer {
@@ -105,6 +120,7 @@ footer {
     position: fixed;
     bottom: 0;
     width: 100%;
+    z-index: 100;
 }
 
 button {
@@ -140,4 +156,81 @@ button:hover {
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+/* Error message styles */
+.error-message {
+    background-color: rgba(255, 0, 0, 0.1);
+    color: #d32f2f;
+    padding: 10px;
+    border-radius: 8px;
+    margin: 10px 0;
+    text-align: center;
+    display: none;
+}
+
+/* Dark mode styles */
+.dark-mode {
+    background: linear-gradient(-45deg, #121212, #1e1e1e, #2d2d2d, #353535);
+    color: #f5f5f5;
+}
+
+.dark-mode .card, 
+.dark-mode .chart-container {
+    background: rgba(30, 30, 30, 0.9);
+    color: #f5f5f5;
+}
+
+.dark-mode header {
+    background-color: #1a1a1a;
+}
+
+.dark-mode footer {
+    background-color: #1a1a1a;
+}
+
+/* Toggle button */
+.mode-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    main {
+        padding: 1rem;
+    }
+    
+    .about {
+        padding: 2rem 1rem;
+    }
+}
+
+/* Risk level indicators */
+.risk-low {
+    color: #4caf50;
+}
+
+.risk-medium {
+    color: #ff9800;
+}
+
+.risk-high {
+    color: #f44336;
 }

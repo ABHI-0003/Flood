@@ -3,54 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Flood Prediction</title>
+    <meta name="description" content="Real-time flood prediction dashboard with environmental data and risk forecasts">
+    <title>Dashboard - Flood Prediction System</title>
     <link rel="stylesheet" href="styles/main.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script type="module" src="node_modules/@material/web/all.js"></script>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
+    <button id="mode-toggle" class="mode-toggle" aria-label="Toggle dark mode">
+        <i class="material-icons">dark_mode</i>
+    </button>
+
     <header>
         <nav>
             <a href="index.html"><i class="material-icons">home</i> Home</a>
             <a href="dashboard.html"><i class="material-icons">dashboard</i> Dashboard</a>
+            <a href="index.html#about"><i class="material-icons">info</i> About</a>
+            <a href="index.html#contact"><i class="material-icons">email</i> Contact</a>
         </nav>
     </header>
 
     <main>
         <h1>Flood Prediction Dashboard</h1>
+        <div id="error-message" class="error-message"></div>
+        <div id="loader" class="loader"></div>
+
+        <div class="dashboard-header">
+            <h2>Current Predictions</h2>
+            <button id="refresh-data" class="refresh-button">
+                <i class="material-icons">refresh</i> Refresh Data
+            </button>
+            <div class="last-updated">
+                Last updated: <span id="last-updated-time">Loading...</span>
+            </div>
+        </div>
+
         <div class="dashboard-grid">
-            <div class="card">
+            <div class="card prediction-card">
                 <h3><i class="material-icons">schedule</i> 24hr Forecast</h3>
                 <p id="24hr-forecast">Loading...</p>
+                <div class="risk-meter">
+                    <div class="risk-indicator" id="risk-24hr"></div>
+                </div>
             </div>
-            <div class="card">
+            <div class="card prediction-card">
                 <h3><i class="material-icons">schedule</i> 48hr Forecast</h3>
                 <p id="48hr-forecast">Loading...</p>
+                <div class="risk-meter">
+                    <div class="risk-indicator" id="risk-48hr"></div>
+                </div>
             </div>
-            <div class="card">
-                <h3><i class="material-icons">water</i> Soil Moisture </h3>
-                <p id="soil-moisture">Loading...</p>
+        </div>
+
+        <h2>Environmental Sensors</h2>
+        <div class="dashboard-grid">
+            <div class="card sensor-card">
+                <h3><i class="material-icons">water</i> Soil Moisture</h3>
+                <div class="sensor-value" id="soil-moisture">Loading...</div>
+                <div class="sensor-details">Measured in meters</div>
             </div>
-            <div class="card">
-                <h3><i class="material-icons">waves</i> Rain</h3>
-                <p id="rain">Loading...</p>
+            <div class="card sensor-card">
+                <h3><i class="material-icons">waves</i> Rainfall</h3>
+                <div class="sensor-value" id="rain">Loading...</div>
+                <div class="sensor-details">Measured in millimeters</div>
             </div>
-            <div class="card">
+            <div class="card sensor-card">
                 <h3><i class="material-icons">thermostat</i> Temperature</h3>
-                <p id="temperature">Loading...</p>
+                <div class="sensor-value" id="temperature">Loading...</div>
+                <div class="sensor-details">Measured in degrees Celsius</div>
             </div>
-            <div class="card">
+            <div class="card sensor-card">
                 <h3><i class="material-icons">opacity</i> Humidity</h3>
-                <p id="humidity">Loading...</p>
+                <div class="sensor-value" id="humidity">Loading...</div>
+                <div class="sensor-details">Measured in percentage</div>
             </div>
         </div>
 
         <!-- Chart Section -->
         <div class="chart-container">
+            <h2>Flood Risk Visualization</h2>
             <canvas id="forecast-chart"></canvas>
+            <div class="chart-legend">
+                <div class="legend-item">
+                    <span class="legend-color risk-low"></span>
+                    <span>Low Risk (Below 50%)</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-color risk-medium"></span>
+                    <span>Medium Risk (75% - 90%)</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-color risk-high"></span>
+                    <span>High Risk (Above 90%)</span>
+                </div>
+            </div>
         </div>
     </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2023 Flood Prediction Team | <a href="index.html#about">About</a> | <a href="index.html#contact">Contact</a></p>
+        </div>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="scripts/main.js"></script>

@@ -2,16 +2,18 @@ services:
   - name: flood-prediction-api
     type: web
     env: python
-    buildCommand: ""
+    buildCommand: pip install -r predictor/requirements.txt
     startCommand: python api-handler/api_handler.py
     envVars:
-      FLASK_ENV: production
-      PORT: 5000
+      - key: FLASK_ENV
+        value: production
+      - key: PORT
+        value: "5000"
     plan: free
     region: oregon
 
-staticSites:
   - name: flood-prediction-website
+    type: static
     buildCommand: ""
     publishPath: website
     plan: free

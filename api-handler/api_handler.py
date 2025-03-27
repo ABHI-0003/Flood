@@ -3,10 +3,15 @@ from flask_cors import CORS
 import sys
 import os
 
+# Add paths to other modules
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../db-handler')))
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../predictor')))
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../open-metro')))  # Add this line
+
 import predictor
 import dbhandler
+from rain_soil import get_previous_day_weather  # Import the function
+
 app = Flask(__name__)
 CORS(app)
 
@@ -61,7 +66,25 @@ def prediction():
 @app.route('/newdata', methods=['POST'])
 def update_data():
     data = request.json
-    return jsonify({"status": "Data updated successfully"}), 200
+
+    # Fetch rainfall and soil moisture from Open-Meteo API using the imported function
+    total_rainfall, avg_soil_moisture = get_previous_day_weather()
+
+    # Extract sensor data from request
+    temperature = data.get("temperature")
+    relative_humidity = data.get("relative_humidity")
+    surface_pressure = data.get("surface_pressure")
+
+    # Combine sensor and API data
+    new_entry = {
+        "temperature": temperature,
+        "relative_humidity": relative_humidity,
+        "rain": total_rainfall,  # From Open-Meteo API
+        "surface_pressure": surface_pressure,
+        "soil_moisture": avg_soil_moisture  # From Open-Meteo API
+    }
+
+    return jsonify({"status": "Data updated successfully", "data": new_entry}), 200
 
 if __name__ == '__main__':
     app.run(debug=True)

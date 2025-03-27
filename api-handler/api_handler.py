@@ -6,11 +6,11 @@ import os
 # Add paths to other modules
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../db-handler')))
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../predictor')))
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../open-meteo')))  # Add this line
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../open-meteo')))  
 
 import predictor
 import dbhandler
-import get_previous_day_weather  # Import the function
+from rain_soil import get_previous_day_weather  # Import the function
 
 app = Flask(__name__)
 CORS(app)
@@ -65,10 +65,13 @@ def prediction():
 
 @app.route('/newdata', methods=['POST'])
 def update_data():
+    print("[DEBUG]: /newdata endpoint called")
     data = request.json
+    print("[DEBUG]: Received data:", data)
 
     # Fetch rainfall and soil moisture from Open-Meteo API using the imported function
     total_rainfall, avg_soil_moisture = get_previous_day_weather()
+    print("[DEBUG]: Open-Meteo API data - Rainfall:", total_rainfall, "Soil Moisture:", avg_soil_moisture)
 
     # Extract sensor data from request
     temperature = data.get("temperature")
@@ -79,14 +82,16 @@ def update_data():
     new_entry = {
         "temperature": temperature,
         "relative_humidity": relative_humidity,
-        "rain": total_rainfall,  # From Open-Meteo API
+        "rain": total_rainfall,
         "surface_pressure": surface_pressure,
-        "soil_moisture": avg_soil_moisture  # From Open-Meteo API
+        "soil_moisture": avg_soil_moisture
     }
+    print("[DEBUG]: Combined data:", new_entry)
 
     # Update the dataset in the database
     try:
         database_handler = dbhandler.DatabaseHandler("../db-handler/dataset.db")
+        print("[DEBUG]: DatabaseHandler initialized")
         database_handler.update_dataset("live_dataset", (
             temperature,
             relative_humidity,
@@ -94,8 +99,10 @@ def update_data():
             surface_pressure,
             avg_soil_moisture
         ))
+        print("[DEBUG]: Dataset updated successfully")
         database_handler.close()
     except Exception as e:
+        print("[ERROR]:", str(e))
         return jsonify({"status": "error", "message": str(e)}), 500
 
     return jsonify({"status": "Data updated successfully", "data": new_entry}), 200

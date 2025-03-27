@@ -6,11 +6,11 @@ import os
 # Add paths to other modules
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../db-handler')))
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../predictor')))
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../open-metro')))  # Add this line
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../open-meteo')))  # Add this line
 
 import predictor
 import dbhandler
-from rain_soil import get_previous_day_weather  # Import the function
+import get_previous_day_weather  # Import the function
 
 app = Flask(__name__)
 CORS(app)

@@ -84,7 +84,20 @@ def update_data():
         "soil_moisture": avg_soil_moisture  # From Open-Meteo API
     }
 
-    return jsonify({"status": "Data updated successfully", "data": new_entry}), 200
+    # Update the dataset in the database
+    try:
+        database_handler = dbhandler.DatabaseHandler("../db-handler/dataset.db")
+        database_handler.update_dataset("live_dataset", (
+            temperature,
+            relative_humidity,
+            total_rainfall,
+            surface_pressure,
+            avg_soil_moisture
+        ))
+        database_handler.close()
+    except Exception as e:
+        return jsonify({"status": "error", "message": str(e)}), 500
 
+    return jsonify({"status": "Data updated successfully", "data": new_entry}), 200
 if __name__ == '__main__':
     app.run(debug=True)

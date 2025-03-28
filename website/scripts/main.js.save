@@ -1,3 +1,4 @@
+	.js
 // JSONPlaceholder API endpoint
 const dataApiUrl = "http://98.70.76.114/api/raw";
 const predApiUrl = "http://98.70.76.114/api/prediction";
